@@ -1,0 +1,47 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+# ─────────────────────────────────────────────────────────────────
+# Requires RENDER_API_KEY and SITE_URL secrets set in repo settings.
+# Get service IDs from: https://api.render.com/v1/services
+# or from the Render dashboard URL: /web/srv-XXXXXXXXX
+# ─────────────────────────────────────────────────────────────────
+
+jobs:
+
+  # Run full CI before deploying
+  ci:
+    uses: wcmchenry3-stack/repo-template/.github/workflows/ci.yml@main
+    # TODO: change repo-template to your actual repo name
+
+  # ── Deploy ───────────────────────────────────────────────────
+  # deploy:
+  #   needs: ci
+  #   uses: wcmchenry3-stack/.github/.github/workflows/called-deploy-render.yml@main
+  #   with:
+  #     service-name: 'my-service'       # human-readable, used in artifact name
+  #     service-id: 'srv-XXXXXXXXX'      # TODO: replace with actual Render service ID
+  #     zap-target-url: 'https://my-service.onrender.com'  # TODO: replace with actual URL
+  #   secrets: inherit
+
+  # For multiple services (e.g., API + frontend), add parallel deploy jobs:
+  # deploy-api:
+  #   needs: ci
+  #   uses: wcmchenry3-stack/.github/.github/workflows/called-deploy-render.yml@main
+  #   with:
+  #     service-name: 'my-api'
+  #     service-id: 'srv-XXXXXXXXX'
+  #     zap-target-url: 'https://my-api.onrender.com'
+  #   secrets: inherit
+
+  # deploy-frontend:
+  #   needs: ci
+  #   uses: wcmchenry3-stack/.github/.github/workflows/called-deploy-render.yml@main
+  #   with:
+  #     service-name: 'my-frontend'
+  #     service-id: 'srv-XXXXXXXXX'
+  #     zap-target-url: 'https://my-frontend.onrender.com'
+  #   secrets: inherit

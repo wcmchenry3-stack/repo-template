@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# ─────────────────────────────────────────────────────────────────
+# Uncomment the jobs relevant to your stack.
+# Set working-directory inputs for monorepos (e.g., backend/, frontend/).
+# All shared workflows live in wcmchenry3-stack/.github.
+# ─────────────────────────────────────────────────────────────────
+
+jobs:
+
+  # Always enabled — scans full git history for secrets
+  secret-scan:
+    uses: wcmchenry3-stack/.github/.github/workflows/called-secret-scan.yml@main
+
+  # ── Python stack ─────────────────────────────────────────────
+  # lint-python:
+  #   uses: wcmchenry3-stack/.github/.github/workflows/called-lint-python.yml@main
+  #   with:
+  #     python-version: '3.11'
+  #     working-directory: '.'        # change to 'backend' for monorepos
+
+  # test-python:
+  #   uses: wcmchenry3-stack/.github/.github/workflows/called-test-python.yml@main
+  #   with:
+  #     python-version: '3.11'
+  #     coverage-threshold: 80
+  #     working-directory: '.'
+  #   secrets: inherit               # passes DATABASE_URL etc. from repo secrets
+
+  # cve-python:
+  #   uses: wcmchenry3-stack/.github/.github/workflows/called-cve-python.yml@main
+  #   with:
+  #     python-version: '3.11'
+  #     working-directory: '.'
+
+  # ── Frontend stack ───────────────────────────────────────────
+  # lint-frontend:
+  #   uses: wcmchenry3-stack/.github/.github/workflows/called-lint-frontend.yml@main
+  #   with:
+  #     node-version: '20'
+  #     working-directory: '.'        # change to 'frontend' for monorepos
+  #     run-a11y: false               # set true for public-facing UI
+
+  # test-frontend:
+  #   uses: wcmchenry3-stack/.github/.github/workflows/called-test-frontend.yml@main
+  #   with:
+  #     node-version: '20'
+  #     coverage-threshold: 80
+  #     working-directory: '.'
+
+  # build-frontend:
+  #   uses: wcmchenry3-stack/.github/.github/workflows/called-build-frontend.yml@main
+  #   with:
+  #     node-version: '20'
+  #     working-directory: '.'
+
+  # cve-frontend:
+  #   uses: wcmchenry3-stack/.github/.github/workflows/called-cve-frontend.yml@main
+  #   with:
+  #     node-version: '20'
+  #     working-directory: '.'
