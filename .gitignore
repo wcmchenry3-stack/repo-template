@@ -68,3 +68,6 @@ $RECYCLE.BIN/
 data/*.db
 data/logs/
 data/wiki_cache/
+
+# Claude Code local overrides (personal, not shared)
+.claude/settings.local.json
